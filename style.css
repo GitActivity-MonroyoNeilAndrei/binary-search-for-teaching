@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+  font-family:'Times New Roman', Times, serif;
+  padding: 0;
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+
+.container {
+  margin: 150px auto;
+  display: flex;
+  justify-content: center;
+}
+
+
+.container div {
+  border: 2px solid red;
+  height: 50px;
+  width: 50px;
+  margin: 0 2px;
+  text-align: center;
+  padding-top: 1px;
+}
+
+#NumOfElements {
+  width: 100px;
+}
+
+.makeRed {
+  background-color: rgb(255, 75, 75);
+}
+
+.makeGreen {
+  background-color: rgb(15, 255, 19);
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="container" id="container">
+  </div>
+
+
+<input type="number" id="NumOfElements">
+
+<label class="ms-5" for="">left</label>
+<input type="range" id="left" step="1">
+<span id="spanLeft">0</span>
+
+<label class="ms-5" for="">right</label>
+<input type="range" id="right" step="1">
+<span id="spanRight"></span>
+
+<button id="myButton" class="btn btn-primary">Get Middle</button>
+
+<script>
+
+  const button = document.getElementById("myButton");
+
+  const container = document.getElementById('container');
+  const NumOfElements = document.getElementById('NumOfElements');
+  NumOfElements.focus();
+
+  const left = document.getElementById('left');
+  const right = document.getElementById('right');
+
+  const spanLeft = document.getElementById('spanLeft');
+  const spanRight = document.getElementById('spanRight');
+
+
+
+  NumOfElements.addEventListener('input', function() {
+
+    removeElements();
+
+    for (i = 0; i < NumOfElements.value; i++) {
+      const newDiv = document.createElement('div');
+      newDiv.id = "_" + i;
+      newDiv.textContent = i;
+      container.appendChild(newDiv);
+    }
+
+    setMinMax();
+    resetElementsColor();
+    activeElements();
+    
+  });
+
+  right.addEventListener(
+    'input', function() {
+      spanRight.textContent = right.value;
+      right.value = right.value;
+
+      resetElementsColor();
+      activeElements();
+
+    }
+  );
+
+  left.addEventListener(
+    'input', function() {
+      spanLeft.textContent = left.value;
+      left.value = left.value;
+
+      resetElementsColor();
+      activeElements();
+
+    }
+  );
+
+  function setMinMax() {
+    spanRight.textContent = NumOfElements.value;
+    right.max = NumOfElements.value;
+    right.min = 1;
+    right.value = NumOfElements.value;
+
+    spanLeft.textContent = 0;
+    left.max = NumOfElements.value;
+    left.min = 1;
+    right.value = NumOfElements.value;
+  }
+
+  function removeElements () {
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+  }
+
+  function activeElements() {
+
+    for (i = left.value - 1; i < right.value; i++) {
+
+
+      let elements = document.getElementById("_" + i);
+
+      elements.classList.add("makeRed");
+    }
+  }
+
+  function resetElementsColor() {
+    for (i = 0; i < NumOfElements.value; i++) {
+
+      let elements = document.getElementById("_" + i);
+
+      elements.classList.remove("makeRed");
+      elements.classList.remove("makeGreen");
+    }
+  }
+
+  button.addEventListener("click", function() {
+
+    let first = Number(right.value) - Number(left.value);
+    let second = Number(first) / 2;
+    let mid = Number(second) + Number(left.value);
+
+
+    let id = Math.round(mid - 1);
+
+    let midElement = document.getElementById("_" + id);
+    
+    midElement.classList.add("makeGreen");
+  });
+
+
+</script>
+
+</body>
+</html>
